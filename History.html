@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Professional Experiences</title>
+  <link rel="icon" type="image/png" href="public/note.png">
+  <!-- 배달의민족 주아 -->
+  <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.0/BMJua.css" rel="stylesheet">
+
+  <!-- 나눔손글씨 가람연꽃 -->
+  <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.0/NanumGaram.ttf" rel="stylesheet" as="font">
+
+  <style>
+    body {
+      font-family: '나눔손글씨 가람연꽃', sans-serif;
+      background-color: #f7fcf3;
+      margin: 0;
+      font-weight: bold;
+      line-height: 150%;
+      padding: 20px;
+    }
+    h2{
+      font-size: 32px;
+      font-family: "배달의민족 도현", sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      text-shadow: 0 6px 10px #152b16(0, 87, 42, 0.15);
+    }
+    h4 {
+      font-family: '배달의민족 도현', sans-serif;
+      margin-left: 15px;
+      margin-top: 50px;
+      text-underline-position: below 1px rgb(4, 35, 4);
+    }
+    .container {
+      max-width: 700px;
+      margin-top: 80px;
+      margin-left: auto;
+      margin-right: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 30px;
+      box-shadow: 0 6px 10px rgba(0, 87, 42, 0.15);
+    }
+    hr {
+      border: none;
+      border-top: #152b16 dashed 2px;
+      margin: 30px 0;
+    }
+
+    input, textarea {
+      width: 95%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #d9dcda;
+      border-radius: 8px;
+      line-height: 150%;
+    }
+
+    button {
+      padding: 5px 10px;
+      font-size: 14px;
+      font-weight: bold;
+      border: 1px;
+      border-radius: 35px;
+      margin-right: 0px;
+      background-color: #152b16;
+      color: rgb(255, 248, 248);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4f9753;
+    }
+
+    .memo-date {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      color: #393636;
+      border-bottom: 1px solid #d0caca;
+      padding-bottom: 5px;
+    }
+
+    .memo {
+      background: #fefefe;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .memo-actions button {
+      background-color: #152b16;
+      color: rgb(255, 248, 248);
+      font-weight: bold;
+      margin-right: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>주요 경력 및 전문교육 이수 내역 </h2>
+<div class="container">
+    <input type="text" id="workPlace" placeholder="근무지역 또는 기관명">
+    <input type="text" id="workPeriod" placeholder="근무기간: YYYY.MM. ~ YYYY.MM.">
+    <textarea id="content" placeholder="상세 경력내용을 입력하세요." rows="8"></textarea><br>
+    <button onclick="saveMemo()">저장</button>
+    <button onclick="clearAll()">삭제</button>
+
+<hr style="border: none; border-top: 2px dashed #ccc; margin: 35px 0;">
+    <h4 style="margin-top:20px;">📌 Professional Experiences</h4>
+    
+    <div id="memoList"></div>
+  </div>
+
+  <script>
+    let editIndex = null;
+    function getMemos() {
+      const memos = localStorage.getItem('memoList');
+      return memos ? JSON.parse(memos) : [];
+    }
+    function saveMemo() {
+      const workPlace = document.getElementById('workPlace').value.trim();
+      const workPeriod = document.getElementById('workPeriod').value.trim();
+      const content = document.getElementById('content').value.trim();
+
+      if (!workPlace || !workPeriod || !content) {
+        alert("근무지역, 근무기간, 상세 내용을 모두 입력해 주세요.");
+        return;
+      }
+
+      const memos = getMemos();
+
+    const newMemo = {
+      workPlace,
+      workPeriod,
+      content,
+      timestamp: new Date().toLocaleString()
+    };
+
+      if (editIndex !== null) {
+        memos[editIndex] = newMemo;
+        editIndex = null;
+      } else {
+        memos.push(newMemo);
+      }
+
+      localStorage.setItem('memoList', JSON.stringify(memos));
+      resetInput();
+      renderMemos();
+    }
+
+    function resetInput() {
+      document.getElementById('workPlace').value = "";
+      document.getElementById('workPeriod').value = "";
+      document.getElementById('content').value = "";
+    }
+
+    function clearAll() {
+      if (confirm("정말 삭제하시겠습니까?")) {
+        localStorage.removeItem('memoList');
+        renderMemos();
+      }
+    }
+
+    function deleteMemo(index) {
+      const memos = getMemos();
+      memos.splice(index, 1);
+      localStorage.setItem('memoList', JSON.stringify(memos));
+      renderMemos();
+    }
+
+    function editMemo(index) {
+      const memos = getMemos();
+      const memo = memos[index];
+      document.getElementById('workPlace').value = memo.workPlace;
+      document.getElementById('workPeriod').value = memo.workPeriod;
+      document.getElementById('content').value = memo.content;
+      editIndex = index;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderMemos() {
+      const memos = getMemos();
+      const memoList = document.getElementById('memoList');
+      memoList.innerHTML = '';
+
+      memos.forEach((memo, index) => {
+        const memoDiv = document.createElement('div');
+        memoDiv.className = 'memo';
+      memoDiv.innerHTML = `
+        <div>
+          <strong style="font-family: '배달의민족 주아'; font-size: 18px; color: #444;">
+            ${memo.workPlace}</strong>
+            <strong style="font-family: '배달의민족 주아'; font-size: 15px; color: #444;">${memo.workPeriod}</strong></div>
+        <div><small>${memo.timestamp}</small></div>
+          <p style="color:#222; font-family: '나눔손글씨 가람연꽃'; font-size: 15px;">${memo.content}</p>
+          <div class="memo-actions">
+            <button onclick="editMemo(${index})">수정</button>
+            <button onclick="deleteMemo(${index})">삭제</button>
+          </div>
+        `;
+
+        memoList.appendChild(memoDiv);
+      });
+    }
+    window.onload = renderMemos;
+  </script>
+</body>
+</html>
