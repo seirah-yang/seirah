@@ -165,4 +165,12 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+"ignore": [
+  ".git",
+  ".runtimeconfig.json",
+  "firebase-debug.log",
+  "firebase-debug.*.log",
+  "node_modules"
+]
+
 # End of https://www.toptal.com/developers/gitignore/api/firebase,git,node
