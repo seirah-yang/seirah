@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notion이 쉬워진다!</title>
+
+  <!-- 태백산 글꼴 -->
+  <link href="https://webfontworld.github.io/taebaek/Taebaek.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'TaebaekMilkyway', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f6fcfe;
+    }
+
+    h1 {
+      text-align: center;
+      text-shadow: 1px 1px 2px #0b314d;
+      margin: 50px 0;
+    }
+
+    .container {
+      padding: 20px;
+      background-color: rgb(246, 253, 253);
+      border-radius: 10px;
+      box-shadow: 0 6px 30px rgba(0, 4, 89, 0.15);
+      max-width: 630px;
+      margin: 0 auto;
+    }
+
+    .info-section {
+      text-align: center;
+      margin-left: 10px;
+      margin-top: 20px;
+    }
+
+    h4 {
+      color: darkslategrey;
+      font-weight: bolder;
+      text-align: left;
+      font-size: 18px;
+      margin-left: 200px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-family: "온글잎 콘콘체", sans-serif;
+      font-size: 22px;
+      text-align: left;
+      margin-left: 38px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .lecture-link {
+      display: block;
+      margin-bottom: 40px;
+      color: #0b314d;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: bolder;
+      text-decoration: none;
+    }
+
+    .lecture-link:hover {
+      text-decoration: underline;
+      text-decoration-color: cadetblue;
+    }
+
+    .lesson-list {
+      list-style: none;
+      text-align: left;
+      line-height: 160%;
+      margin-left: 50px;
+      counter-reset: lesson-counter;
+      padding-left: 0;
+    }
+
+    .lesson-list li {
+      counter-increment: lesson-counter;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .lesson-list li::before {
+      content: counter(lesson-counter) "강. ";
+      font-weight: bold;
+      color: #2d2c2c;
+    }
+
+    .lesson-list a {
+      color: #2f2e2e;
+      text-decoration: none;
+    }
+
+    .lesson-list a:hover {
+      text-decoration: underline;
+    }
+
+    .blink-smooth {
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      40% { opacity: 0.2; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>[ NOTION 사용방법 자료 공유 ]</h1>
+    
+
+  <div class="container">
+    <div class="info-section">
+      
+
+      <h3><a href="https://www.notion.so/Notion-List-240d44a085da809bba84e27864c748c3?source=copy_link" class="lecture-link">
+        [End-to-End AI master 2기] Notion 사용방법 자료 공유소
+      </a></h3>
+
+      <p>🗣️ 사용방법 소개 LIST</p>
+      <ul class="lesson-list">
+        <li><a href="https://www.notion.so/1-Notion-240d44a085da80a2add6e95b29bd23fd?source=copy_link" class="custom-link">Notion 왜 사용해야할까?</a></li>
+        <li><a href="https://www.notion.so/2-240d44a085da8048b58bff11621ebb27?source=copy_link" class="custom-link">템플릿, 가져와서 사용하기</a></li>
+        <li><a href="" class="custom-link">나만의 템플릿, 만들어서 사용하기</a></li>
+        <li><a href="" class="custom-link">노션에서 "/"기능을 잘 활용하자</a></li>
+        <li><a href="" class="custom-link">노션에서 활용가능한 레이아웃의 종류 </a></li>
+        <li><a href="" class="custom-link">토글목록, 제목토글 사용하기</a></li>
+        <li><a href="" class="custom-link">노션에서 코드, 수학연산식, 도형 만들기 </a></li>
+        <li><a href="" class="custom-link">단축기를 활용하면 노션이 쉬워진다.</a></li>
+        <br>
+        <br>
+        <h4 class="blink-smooth"> 💡 궁금한 사항은 언제든지 문의주세요.</h4>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>
