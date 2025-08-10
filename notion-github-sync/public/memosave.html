@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>메모 저장</title>
+ 
+  <style>
+    body {
+      margin: 0;
+      font-family: 'TaebaekMilkyway', sans-serif;
+      padding: 20px;
+      position: relative;
+    }
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: url("images/note.png");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+        z-index: -1;
+    }
+    .container {
+    padding: 20px;
+    background-color: white; 
+    border-radius: 10px;     
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    }
+
+    input, textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      background: rgba(2, 205, 205, 0.1);
+      border: 1px solid #215931;
+    }
+
+    .memo {
+      border: 1px solid #e6d7d7;
+      padding: 10px;
+      margin-bottom: 8px;
+      background-color: rgba(255, 255, 255);
+    }
+  </style>
+</head>
+
+<body>
+<style>
+    body {
+        font-size: large;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: bolder;
+        }
+</style>
+
+<div class="container">
+  <h2> 📝 Daily 기록을 남겨주세요</h2>
+  <input type="text" id="title" placeholder="제목을 입력하세요">
+  <textarea id="content" placeholder="내용을 입력하세요" rows="8"></textarea><br>
+  <button onclick="saveMemo()">저장</button>
+  <button onclick="clearAll()">삭제</button>
+
+  <h3> [ HISTORY ] </h3>
+  <div class="memo-list" id="memoList"></div>
+</div>
+
+  <script>
+    function getMemos() {
+      const memos = localStorage.getItem('MemoList');
+      return memos ? JSON.parse(memos) : [];
+    }
+
+    function saveMemo() {
+      const title = document.getElementById('title').value.trim();
+      const content = document.getElementById('content').value.trim();
+      if (!title || !content) {
+        alert("제목과 내용을 모두 입력해주세요.");
+        return;
+      }
+
+      const newMemo = {
+        title,
+        content,
+        timestamp: new Date().toLocaleString()
+      };
+
+      const memos = getMemos();
+      memos.push(newMemo);
+      localStorage.setItem('Memo-List', JSON.stringify(memos));
+
+      document.getElementById('title').value = '';
+      document.getElementById('content').value = '';
+      renderMemos();
+    }
+
+    function renderMemos() {
+      const memos = getMemos();
+      const memoList = document.getElementById('Memo-List');
+      memoList.innerHTML = '';
+
+
+      memos.forEach((memo, index) => {
+        const memoDiv = document.createElement('div');
+        memoDiv.className = 'memo';
+        memoDiv.innerHTML = `
+          <strong>${memo.title}</strong> <small>(${memo.timestamp})</small>
+          <p>${memo.content}</p>
+          <button onclick="deleteMemo(${index})">삭제</button>
+        `;
+        memoList.appendChild(memoDiv);
+      });
+    }
+
+    function deleteMemo(index) {
+      const memos = getMemos();
+      memos.splice(index, 1);
+      localStorage.setItem('memoList', JSON.stringify(memos));
+      renderMemos();
+    }
+
+    function clearAll() {
+      if (confirm("delete")) {
+        localStorage.removeItem('Memo-List');
+        renderMemos();
+      }
+    }
+
+    window.onload = renderMemos;
+  </script>
+
+</body>
+</html>

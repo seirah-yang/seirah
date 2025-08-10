@@ -165,4 +165,14 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+"hosting": {
+  // ...
+
+  "ignore": [
+    "firebase.json",  // the Firebase configuration file (the file described on this page)
+    "**/.*",  // files with a leading period should be hidden from the system
+    "**/node_modules/**"  // contains dependencies used to create your site but not run it
+  ]
+}
+
 # End of https://www.toptal.com/developers/gitignore/api/firebase,git,node

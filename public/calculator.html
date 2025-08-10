@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko" lang="en">
+    <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> [End-2-End 2기] Seirah-yang/Seirah space</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.dropotron.min.js"></script>
+	<script src="js/skel.min.js"></script>
+	<script src="js/skel-layers.min.js"></script>
+	<script src="js/init.js"></script>
+<!-- 태백산 글꼴 불러오기 -->
+  <link href="https://webfontworld.github.io/taebaek/Taebaek.css" rel="stylesheet">
+<!-- 배달의민족 주아 -->
+  <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.0/BMJua.css" rel="stylesheet">
+<!-- 나눔손글씨 가람연꽃 -->
+  <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.0/NanumGaramGothic.css" rel="stylesheet">
+  
+<style>
+    body {
+        font-family: "NanumGaramGothic", sans-serif ;
+            font-size: 24px;
+    }
+</style>
+	<noscript>
+		<link rel="stylesheet" href="css/skel.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style-desktop.css" />
+	</noscript>
+	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+    </head>
+    <body class="homepage">
+
+    <!-- Header -->
+	<div id="header-wrapper">
+		<div id="header" class="container">
+
+<!-- 아바타 삽입 -->
+  <style>
+   image {
+      width: 100%;
+      height: auto;
+      }
+  .avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    }
+  </style>
+
+  <div class="container">   
+    <nav id="nav">
+
+<!-- 버튼삽입 -->
+<!-- #1 -->
+	<ul>
+        <li>
+        <a href="" class="icon fa-bar-chart-o"><span>HOME</span></a>
+            <ul>
+            <li><a href="self.html" ><span>자기소개</a></li>
+            <li></li><a href="#"><span>CV저장소</a></li>
+            </ul>
+        </li>
+<!-- #2 -->
+	<li>
+        <a href="" class="icon fa-bar-chart-o"><span>PROFILE</span></a>
+        <ul>
+            <li><a href="History.html"><span>경력/교육내역</a></li>
+            <li><a href="project.html"><span>프로젝트</a></li>
+        </ul>
+    </li>
+<!-- #3 -->
+    <li>
+        <a href="" class="icon fa-bar-chart-o"><span>BootCamp</span></a>
+        <ul>
+            <li><a href="https://www.notion.so/Boot-page-222d44a085da80e9b838cac3e7291740?source=copy_link#225d44a085da80eebab9ec44ce023ed4"><span>이론수업 정리</a></li>
+                <li><a href="https://www.notion.so/222d44a085da8099aeb5c444958f16c3?v=222d44a085da81198f1e000c0a15766d&source=copy_link"><span>Code/Colab 정리</a></li>
+        </ul>
+    </li>
+<!-- #4 -->
+    <li>
+        <a href="" class="icon fa-bar-chart-o"><span>HomeWork</span></a>
+        <ul>
+            <li><a href="https://www.notion.so/Boot-page-222d44a085da80e9b838cac3e7291740?source=copy_link"><span>노트정리공유</a></li>
+            <li><a href="todolist.html"><span>실습과제공유</a></li>
+        </ul>
+    </li>
+<!-- #5 -->
+    <li>
+        <a href="" class="icon fa-bar-chart-o"><span>[공유]NOTION사용</span></a>
+        <ul>
+            <li><a href="notion.html"><span>Notion사용</a></li>
+        </ul>
+    </li>
+    </ul>  
+    </nav>
+    </div>  
+
+<!-- Logo -->
+    <h1 id="logo"><a href="index.html">X-pace</a></h1>
+
+    <div class="welcome" display="flex";>
+    <p style="font-family: 'NanumGaramGothic';">JG＇ X-pace에 오신 여러분을 환영합니다</p> 
+    <img src="123.png" alt="JG" class="avatar">	
+    </div>
+<style>
+  body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: url("images/pic06.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+        z-index: -1;
+    }
+h1 {
+    text-align: center;
+}
+</style>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+
+</script>
+  <style>
+    body {
+      font-family: 'SUITE', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f7f9;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    
+ .guestbook-wrapper {
+   width: 700px;
+   gap: 10px;
+   box-sizing: border-box;
+   margin-bottom: 3px;
+   border-radius: 20pxpx;
+ }
+.calculator-wrapper {
+  width: 200px;
+  height: 300px;
+  background-color: #eaf6fa;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font-family: 'SUITE', sans-serif;
+  color: #0d3b66;
+  overflow: hidden;
+}
+
+.calculator input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #90e0ef;
+  background-color: #f2fbfd;
+  text-align: right;
+}
+
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.calc-buttons button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.calc-buttons button:hover {
+  background-color: #0096c7;
+}
+
+.clear-btn {
+  grid-column: span 4;
+  background-color: #cffb2f;
+}
+
+.clear-btn:hover {
+  background-color: #cffb2f;
+}
+    .calc-buttons button:hover {
+      background-color: #0096c7;
+    }
+
+    .clear-btn:hover {
+      background-color: #cffb2f;
+    }
+
+    .guestbook-wrapper iframe {
+      width: 100%;
+      width: px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 계산기 영역 -->
+    <div class="calculator-wrapper">
+      <div class="calculator">
+        <input type="text" id="calc-display" readonly />
+        <div class="calc-buttons">
+          <button onclick="appendCalc('7')">7</button>
+          <button onclick="appendCalc('8')">8</button>
+          <button onclick="appendCalc('9')">9</button>
+          <button onclick="appendCalc('/')">÷</button>
+
+          <button onclick="appendCalc('4')">4</button>
+          <button onclick="appendCalc('5')">5</button>
+          <button onclick="appendCalc('6')">6</button>
+          <button onclick="appendCalc('*')">×</button>
+
+          <button onclick="appendCalc('1')">1</button>
+          <button onclick="appendCalc('2')">2</button>
+          <button onclick="appendCalc('3')">3</button>
+          <button onclick="appendCalc('-')">−</button>
+
+          <button onclick="appendCalc('0')">0</button>
+          <button onclick="appendCalc('.')">.</button>
+          <button onclick="calculateResult()">=</button>
+          <button onclick="appendCalc('+')">+</button>
+
+          <button onclick="clearCalc()" class="clear-btn">C</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 방명록 영역 -->
+    <div class="guestbook-wrapper">
+     <iframe src="memosave.html" width="600px" height="900px" style="border: none; overflow: hidden;"></iframe>
+    </div>
+  </div>
+
+  <!-- 계산기 기능 -->
+  <script>
+    function appendCalc(value) {
+      document.getElementById('calc-display').value += value;
+    }
+
+    function clearCalc() {
+      document.getElementById('calc-display').value = '';
+    }
+
+    function calculateResult() {
+      const input = document.getElementById('calc-display').value;
+      try {
+        const result = eval(input);
+        document.getElementById('calc-display').value = result;
+      } catch {
+        document.getElementById('calc-display').value = '오류';
+      }
+    }
+  </script>
+
+</body>
+</html>

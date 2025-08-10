@@ -1,0 +1,21 @@
+{
+  "projects": {
+    "default": "makeshome-48262"
+  },
+  "targets": {
+    "makeshome-48262": {
+      "hosting": {
+        "sora//": [
+          "Import",
+          "SDKs",
+          "from",
+          "functions",
+          "need",
+          "the",
+          "you"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

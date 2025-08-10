@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >햄버거하우스</title>
+
+<body>
+<style>
+  body {
+    background-image: url("https://previews.123rf.com/images/captainvector/captainvector2206/captainvector220653000/186953058-infographic-of-a-burger.jpg");
+    background-color: azure;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+    h1 {
+      color: aliceblue;
+      font-weight: bold;
+      text-align: center;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      font-size: 60px;
+      margin-top: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-flow: row-reverse;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .main-box {
+      width: 100px;
+      height: 700px;
+      overflow: hidden;
+      border: 2px solid rgb(214, 240, 180);
+      background-color: rgba(240, 246, 141, 0.3);
+    }
+
+
+    .item.1 {
+      animation-duration: 11s;
+    }
+
+    .item.2 {
+      animation-duration: 12s;
+    }
+
+    .item.3 {
+      animation-duration: 13s;
+    }
+
+    .item {
+      font-size: 40px;
+      text-align: center;
+      background-color: aliceblue;
+      display: flex;
+      flex-direction: column;
+      animation: scrollUp 10s infinite;
+      line-height: 100px;
+    }
+
+    @keyframes scrollUp {
+      0% { top: -1400;
+        transform: translateY(0);
+      }
+      100% {top: 1400;
+        transform: translateY(-50%);
+      }
+    }
+</style>
+  <h1 style="color: aliceblue; font-weight: bold; text-align: center; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 60px;"> 햄버거하우스 </h1>
+  <div class="container">
+    <div class="main-box">
+      <div class="item2">
+      <div class="item">🍟</div>
+      <div class="item">🍞</div>
+      <div class="item">🧀</div>
+      <div class="item">🥬</div>
+      <div class="item">🫓</div>
+      <div class="item">🍞</div>
+      <div class="item">🥧</div>
+      <div class="item">🍟</div>
+      <div class="item">🍞</div>
+      <div class="item">🧀</div>
+      <div class="item">🥬</div>
+      <div class="item">🫓</div>
+      <div class="item">🍞</div>
+      <div class="item">🥧</div>
+      </div>
+    </div>
+    <div class="main-box">
+      <div class="item1">
+        <div class="item">😍</div>
+        <div class="item">요</div>
+        <div class="item">세</div>
+        <div class="item">오</div>
+        <div class="item">서</div>
+        <div class="item">어</div>
+        <div class="item">😍</div>
+        <div class="item">요</div>
+        <div class="item">세</div>
+        <div class="item">오</div>
+        <div class="item">서</div>
+        <div class="item">어</div>
+      </div>
+    </div>
+    <div class="main-box">
+      <div class="item3">
+        <div class="item">🧋</div>
+        <div class="item">🍵</div>
+        <div class="item">🧃</div>
+        <div class="item">🧉</div>
+        <div class="item">🍹</div>
+        <div class="item">🍷</div>
+        <div class="item">🧊</div>
+        <div class="item">🧋</div>
+        <div class="item">🍵</div>
+        <div class="item">🧃</div>
+        <div class="item">🧉</div>
+        <div class="item">🍹</div>
+        <div class="item">🍷</div>
+        <div class="item">🧊</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

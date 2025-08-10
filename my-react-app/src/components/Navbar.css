@@ -1,0 +1,70 @@
+.navbar {
+  position: fixed; /* 항상 화면 상단 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white; /* 필요시 변경 */
+  z-index: 1000;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 20px;
+  list-style: none;
+}
+
+.menu > li {
+  position: relative;
+  margin-right: 20px;
+}
+
+.menu a,
+.menu button {
+  background: none;
+  border: none;
+  padding: 10px 5px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.menu a:hover,
+.menu button:hover {
+  color: #0077b6;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding: 5px 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  min-width: 160px;
+}
+
+.submenu li {
+  margin: 0;
+}
+
+.submenu a {
+  display: block;
+  padding: 8px 12px;
+  color: #000;
+  text-decoration: none;
+}
+
+.submenu a:hover {
+  background-color: #f4f4f4;
+}
+
+.menu > li:hover .submenu {
+  display: block;
+}

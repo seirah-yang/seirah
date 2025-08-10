@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[ 햄버거하우스 게임]</title>
+  <style>
+/*본체*/
+    body {
+      background-image: url("https://previews.123rf.com/images/captainvector/captainvector2206/captainvector220653000/186953058-infographic-of-a-burger.jpg");
+      background-color: azure;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      margin-top: 250px;
+    }
+    p {
+      font-size: 8px;
+    }
+    h1 {
+      text-shadow:0 0 10px color(srgb 0, 0, 0, 0.5);
+      color: aliceblue;
+      font-weight: bold;
+      font-size: 80px;
+      margin-top: 30px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+/*버튼*/
+    .buttons {
+      margin: 20px;
+    }
+    .buttons button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 0 10px;
+      cursor: pointer;
+      font-weight: bold;
+      color: burlywood;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+/*컨테이너박스*/
+    .container {
+      display: flex;
+      flex-flow: row-reverse;
+      justify-content: center;
+      gap: 10px;
+    }
+    .main-box {
+      width: 100px;
+      height: 700px;
+      overflow: hidden;
+      border: 2px solid rgb(214, 246, 234);
+      background-color: rgba(255, 255, 255, 0.3);
+      position: relative;
+    }
+
+/*slot창*/
+    .main-box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 110%;
+      background: rgba(241, 6, 41, 0.2); 
+      pointer-events: none;
+      z-index: 5;
+      mask: 
+      linear-gradient(to bottom, transparent 40%, black 40%, black 50%, transparent 50%);
+      -webkit-mask: 
+      linear-gradient(to bottom, transparent 40%, black 40%, black 50%, transparent 50%);
+    }
+
+  /*item*/
+    .items {
+      display: flex;
+      flex-direction: column;
+      animation: scrollUp 5s linear infinite;
+      animation-play-state: paused; 
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+      font-size: 40px;
+      background-color: aliceblue;
+      text-align: center;
+      line-height: 100px;
+    }
+    /*speed분류*/
+    .items.slow {animation-duration: 1s;}
+    .items.medium {animation-duration: 1s;}
+    .items.fast {animation-duration: 1s;}
+
+/*모션*/
+  @keyframes scrollUp {
+    0% {transform: translateY(0); }
+    100% {transform: translateY(-50%); }
+  }
+  #resultMessage {
+    display: none;
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 28px;
+    color: crimson;
+    font-weight: bold;
+    border: 3px solid crimson;
+    z-index: 999;
+  }
+
+  </style>
+</head>
+
+<body>
+  <h1>[ 햄Hㅓ거 게임 HoUsE ]</h1>
+  <div class="buttons">
+    <button style="font-weight:bold; color: rgb(73, 31, 2); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" onclick="startScroll()">🌀시작</button>
+    <button style="font-weight:bold; color: rgb(73, 31, 2); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" onclick="stopScroll()">🌀그만</button>
+  </div>
+
+  <div class="container">
+    <div class="main-box">
+      <div class="items medium">
+        <div class="item">🧊</div>
+        <div class="item">🍵</div>
+        <div class="item">🧃</div>
+        <div class="item">🥧</div>
+        <div class="item">🍟</div>
+        <div class="item">🍞</div>
+        <div class="item">🧀</div>
+        <div class="item">🧋</div>
+        <div class="item">🍵</div>
+        <div class="item">🧃</div>
+        <div class="item">🧉</div>
+        <div class="item">🥧</div>
+        <div class="item">🍟</div>
+        <div class="item">🍹</div>
+        <div class="item">🍷</div>
+        <div class="item">🫓</div>
+        <div class="item">🍞</div>
+      </div>
+    </div>
+      <div class="main-box">
+      <div class="items fast">
+        <div class="item">🫓</div>
+        <div class="item">🍞</div>
+        <div class="item">🍵</div>
+        <div class="item">🧃</div>
+        <div class="item">🥧</div>
+        <div class="item">🍟</div>
+        <div class="item">🍞</div>
+        <div class="item">🧀</div>
+        <div class="item">🧋</div>
+        <div class="item">🍵</div>
+        <div class="item">🧃</div>
+        <div class="item">🧉</div>
+        <div class="item">🥧</div>
+        <div class="item">🍟</div>
+        <div class="item">🍹</div>
+        <div class="item">🍷</div>
+        <div class="item">🧊</div>
+      </div>
+    </div>
+    <div class="main-box">
+      <div class="items slow">
+        <div class="item">🍵</div>
+        <div class="item">🧃</div>
+        <div class="item">🥧</div>
+        <div class="item">🍟</div>
+        <div class="item">🍞</div>
+        <div class="item">🧀</div>
+        <div class="item">🧋</div>
+        <div class="item">🍵</div>
+        <div class="item">🧃</div>
+        <div class="item">🧉</div>
+        <div class="item">🥧</div>
+        <div class="item">🍟</div>
+        <div class="item">🍹</div>
+        <div class="item">🍷</div>
+        <div class="item">🧊</div>
+        <div class="item">🫓</div>
+        <div class="item">🍞</div>
+      </div>
+    </div>
+  </div>
+<div id="resultMessage">😢 아쉽군요! 다시 도전해보세요!</div>
+
+<script>
+  function startScroll() {
+    document.querySelectorAll('.items').forEach(el => {
+      el.style.animationPlayState = 'running';
+    });
+    document.getElementById('resultMessage').style.display = 'none';
+  }
+
+  function stopScroll() {
+    const items = Array.from(document.querySelectorAll('.items'));
+
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+
+    items.forEach((el, idx) => {
+      const delay = 500 + Math.random() * 1500; 
+
+      setTimeout(() => {
+        el.style.animationPlayState = 'paused';
+
+        if (idx === items.length - 1) {
+          checkResult();
+        }
+      }, delay * idx); 
+    });
+  }
+
+/*그림비교해서 정답확인하기*/
+  function checkResult() {
+  const centers = [];
+
+  document.querySelectorAll('.main-box').forEach((box) => {
+    const items = box.querySelectorAll('.item');
+    const centerIndex = Math.floor(items.length / 2);
+    const centerItem = items[centerIndex];
+    centers.push(centerItem.textContent.trim());
+  });
+
+  const result = document.getElementById('resultMessage');
+
+  if (centers[0] === centers[1] && centers[1] === centers[2]) {
+    result.textContent = "🎉 축하합니다! 🥳 햄버거 완성!";
+  } else {
+    result.textContent = "😢 아쉽군요! 다시 도전해보세요!";
+  }
+
+  result.style.display = 'block';
+
+  setTimeout(() => {
+    result.style.display = 'none';
+  }, 3000);
+}
+</script>
+  <p>https://www.w3schools.com/cssref/tryit.php?filename=trycss3_animation-play-state_hover</p>
+  <p>trycss3_animation-play-state_hover> https://www.w3schools.com/cssref/tryit.php?filename=trycss3_animation-play-state</p>
+  <p>https://www.w3schools.com/cssref/css3_pr_animation-timing-function.php</p>
+  <p>https://www.w3schools.com/graphics/game_intro.asp</p>
+</body>
+</html>

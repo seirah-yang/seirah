@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko" lang="en">
+    <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> [End-2-End 2기] Seirah-yang/Seirah space-X</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.dropotron.min.js"></script>
+	<script src="js/skel.min.js"></script>
+	<script src="js/skel-layers.min.js"></script>
+	<script src="js/init.js"></script>
+<!-- 태백산 글꼴 불러오기 -->
+    <link href="https://webfontworld.github.io/taebaek/Taebaek.css" rel="stylesheet">
+
+	<noscript>
+		<link rel="stylesheet" href="css/skel.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style-desktop.css" />
+	</noscript>
+	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+    </head>
+    <body class="homepage">
+
+    <!-- Header -->
+	<div id="header-wrapper">
+		<div id="header" class="container">
+
+<!-- 아바타 삽입 -->
+  <style>
+   image {
+      width: 100%;
+      height: auto;
+      }
+  .avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    }
+  </style>
+
+  <div class="container">   
+    <nav id="nav">
+
+<!-- 버튼삽입 -->
+
+<!-- #1 -->
+	<ul>
+        <li>
+        <a href="" class="icon fa-bar-chart-o"><span>HOME</span></a>
+            <ul>
+            <li><a href="#" ><span>자기소개</a></li>
+            <li></li><a href="#"><span>CV</a></li>
+            </ul>
+        </li>
+<!-- #2 -->
+	<li>
+        <a href="" class="icon fa-bar-chart-o"><span>PROFILE</span></a>
+        <ul>
+            <li><a href="#"><span>History</a></li>
+            <li><a href="#"><span>개인프로젝트</a></li>
+        </ul>
+    </li>
+<!-- #3 -->
+    <li>
+        <a href="" class="icon fa-bar-chart-o"><span>BootCamp</span></a>
+        <ul>
+            <li><a href="#"><span>History</a></li>
+                <li><a href="#"><span>개인프로젝트</a></li>
+        </ul>
+    </li>
+<!-- #4 -->
+    <li>
+        <a href="" class="icon fa-bar-chart-o"><span>프로젝트자료</span></a>
+        <ul>
+            <li><a href="#"><span>참고자료</a></li>
+        </ul>
+    </li>
+<!-- #5 -->
+    <li>
+        <a href="" class="icon fa-bar-chart-o"><span>[공유]NOTION 사용방법</span></a>
+        <ul>
+            <li><a href="cwpage.html"><span>목차</a></li>
+        </ul>
+    </li>
+    </ul>  
+    </nav>
+    </div>  
+
+<!-- Logo -->
+    <h1 id="logo"><a href="index.html">X-pace</a></h1>
+
+    <div class="welcome" display="flex";>
+    <p>JG' Xpace에 오신 여러분을 환영합니다</p> 
+    <img src="123.png" alt="JG" class="avatar">	
+    </div>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+
+</script>
+</body>
+</html>

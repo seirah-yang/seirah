@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>짝 맞추기 게임</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fefae0;
+    }
+
+    .game-wrapper {
+      max-width: 1024px;
+      margin: 50px auto;
+      padding: 15px;
+      border: 2px solid #522900;
+      border-radius: 12px;
+      background-color: rgb(251, 254, 245);
+      box-shadow: 0 4px 12px rgba(26, 13, 1, 0.3);
+      text-align: center;
+    }
+
+    h1 {
+      color: #523700;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: rgb(230, 248, 216);
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #c4efe7;
+    }
+
+    #container {
+      width: 600px;
+      height: 600px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+      background: rgb(241, 225, 150);
+      margin: 30px auto;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      width: 100px;
+      height: 100px;
+      perspective: 1000px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .flip-card-front {
+      background-color: #bbb;
+      color: black;
+    }
+
+    .flip-card-back {
+      background-color: #e2efcc;
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    .matched .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    #message {
+      font-size: 20px;
+      margin-top: 10px;
+      color: #4e2600;
+    }
+
+    .matched {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-wrapper">
+    <h1>아이템 짝맞추기</h1>
+    <h2>❗특명❗ 카드를 뒤집어라❕</h2>
+    <div id="message">Game Start</div>
+    <button onclick="startRandomColors()">Game Start</button>
+    <button onclick="stopRandomColors()">Stop</button>
+    <div id="container"></div>
+  </div>
+
+  <script>
+    const emojis = [
+      "😻", "🐍", "🦖", "😻", "😆", "🦖", "😀", "😆", "😻", "🐍",
+      "😄", "🌺", "😻", "😆", "🦖", "🫧", "🎀", "🐍", "🐾", "😆",
+      "😄", "✏️", "🎀", "😀", "🪴", "🫧", "🐙", "🌺", "🦸🏻‍♂️", "🪴",
+      "🚍", "🦸🏻‍♂️", "🚍", "✏️", "🐙", "🐾"
+    ].sort(() => Math.random() - 0.5);
+
+    const container = document.getElementById('container');
+    const message = document.getElementById('message');
+
+    emojis.forEach((emoji) => {
+      const flipCard = document.createElement("div");
+      flipCard.classList.add("flip-card");
+
+      const inner = document.createElement("div");
+      inner.classList.add("flip-card-inner");
+
+      const front = document.createElement("div");
+      front.classList.add("flip-card-front");
+      front.textContent = "";
+
+      const back = document.createElement("div");
+      back.classList.add("flip-card-back");
+      back.textContent = emoji;
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+      flipCard.appendChild(inner);
+      flipCard.dataset.emoji = emoji;
+
+      container.appendChild(flipCard);
+    });
+
+    let first = null;
+    let second = null;
+    let lock = false;
+
+    container.addEventListener("click", (e) => {
+      const clicked = e.target.closest(".flip-card");
+      if (!clicked || clicked.classList.contains("matched") || lock) return;
+
+      const inner = clicked.querySelector(".flip-card-inner");
+      inner.style.transform = "rotateY(180deg)";
+
+      if (!first) {
+        first = clicked;
+      } else if (!second && clicked !== first) {
+        second = clicked;
+        lock = true;
+
+        if (first.dataset.emoji === second.dataset.emoji) {
+          message.textContent = "정답입니다!";
+          first.classList.add("matched");
+          second.classList.add("matched");
+          setTimeout(() => {
+            reset();
+          }, 800);
+        } else {
+          message.textContent = "아쉽군요; 다시 시도해보세요!";
+          setTimeout(() => {
+            first.querySelector(".flip-card-inner").style.transform = "rotateY(0deg)";
+            second.querySelector(".flip-card-inner").style.transform = "rotateY(0deg)";
+            reset();
+          }, 800);
+        }
+      }
+    });
+
+    function reset() {
+      first = null;
+      second = null;
+      lock = false;
+    }
+
+    let intervalId;
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function startRandomColors() {
+      if (intervalId) return;
+      intervalId = setInterval(() => {
+        container.style.background = getRandomColor();
+      }, 600);
+    }
+
+    function stopRandomColors() {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  </script>
+
+  <p style="text-align: center; font-size: 8px;">
+    참고: 
+    <a href="https://www.w3schools.com/howto/howto_css_flip_card.asp" target="_blank">W3Schools Flip Card</a>
+  </p>
+</body>
+</html>

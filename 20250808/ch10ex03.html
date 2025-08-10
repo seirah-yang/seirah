@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>콜백 데모</title>
+</head>
+<body>
+  <script>
+    // 1) 일반 함수
+    function myQuery() {
+      console.log("myQuery 함수 호출");
+    }
+
+    // 2) 함수 '참조' 저장 (정의된 식별자 사용!)
+    const myQueryRef = myQuery;
+
+    // 3) 콜백을 받아 실행하는 함수 #1
+    function myQuery02(cb) {
+      console.log("myQuery02 함수 실행");
+      if (typeof cb === "function") {
+        cb(1005, "ok");
+      } else {
+        console.error("myQuery02: 함수가 아닌 값을 콜백으로 받았습니다.");
+      }
+    }
+
+    // 4) 콜백을 받아 실행하는 함수 #2 (원래 코드의 fn02 역할)
+    function fn02(cb) {
+      console.log("fn02 함수 실행");
+      if (typeof cb === "function") {
+        cb(2001, "good");
+      } else {
+        console.error("fn02: 함수가 아닌 값을 콜백으로 받았습니다.");
+      }
+    }
+
+    // === 실행 예시 ===
+    myQuery();                 // "myQuery 함수 호출"
+    myQueryRef();              // 참조된 함수도 동일하게 호출 가능
+
+    myQuery02(function(a, b) { // 익명 콜백
+      console.log("myQuery02 콜백 실행:", a, b);
+    });
+
+    fn02((a, b) => {           // 화살표 함수 콜백
+      console.log("fn02 콜백 실행:", a, b);
+    });
+
+    // 불필요한 console.log() 단독 호출은 제거
+  </script>
+</body>
+</html>
