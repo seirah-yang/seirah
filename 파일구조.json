@@ -1,15 +1,19 @@
-📦 todo-tracker-app
-┣ 📂 public
-┃ ┣ 📂 css
-┃ ┃ ┗ styles.css
-┃ ┗ 📂 js
-┣ 📂 views
-┃ ┣ 📂 partials
-┃ ┃ ┣ _head.ejs
-┃ ┃ ┗ _nav.ejs
-┃ ┣ todoList.ejs
-┃ ┣ todoInput.ejs
-┃ ┗ todoDetail.ejs
-┣ app.js
-┣ package.json
-┗ README.md
+  HabiDo_Application/
+  ├── app.js
+  ├── package.json
+  ├── .env
+  ├── .gitignore
+  ├── public/
+  │   ├── styles.css
+  │   └── images/
+  │       └── logo.PNG
+  └── views/
+      └── partials/
+      │    ├── _head.ejs
+      │    ├── _header.ejs
+      │    └── _footer.ejs
+      ├── home.ejs
+      ├── calendar.ejs
+      ├── todoInput.ejs
+      ├── todoList.ejs
+      └── todoDetail.ejs
