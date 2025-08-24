@@ -9,37 +9,37 @@
 
 
 ## 주요 기능
-    •	할 일 등록 / 수정 / 삭제 (AJAX 기반 삭제기능 지원)
-    •	체크박스로 완료 여부 표시
+    • 할 일 등록 / 수정 / 삭제 (AJAX 기반 삭제기능 지원)
+    • 체크박스로 완료 여부 표시
     • 속성에서 반복적으로 수행하는 요일 표시
-    •	태그, 마감일, 메모, 진행기간 관리
-    •	Tracking 속성:
+    • 태그, 마감일, 메모, 진행기간 관리
+    • Tracking 속성:
       - 진행 상태(완료, 진행중, 일정변경, 기타 등)
       - 속성별 메모 입력 및 요일과 진행기간 입력 가능
       - 항목별 내용 변경사항 저장 및 삭제 가능 
-    •	리스트 UI: 선택/체크박스 + 태그 + 날짜 
-    •	반응형 레이아웃 및 애니메이션을 적용하여 삭제 시 자연스럽게 사라지게 함
+    • 리스트 UI: 선택/체크박스 + 태그 + 날짜 
+    • 반응형 레이아웃 및 애니메이션을 적용하여 삭제 시 자연스럽게 사라지게 함
 
 
 ## 기술 스택
-	•	Frontend: EJS, CSS (flexbox 레이아웃, 애니메이션)
-	•	Backend: Node.js, Express.js
-	•	 Database: MongoDB 
-	•	기타: Fetch API (AJAX 비동기 처리), RESTful API구조 
+	• Frontend: EJS, CSS (flexbox 레이아웃, 애니메이션)
+	• Backend: Node.js, Express.js
+	• Database: MongoDB 
+	• 기타: Fetch API (AJAX 비동기 처리), RESTful API구조 
 
   ## 주요 API 라우트 
-    •	목록: GET /todo/list → todoList.ejs
-    •	입력폼: GET /todo/input → todoInput.ejs
-    •	상세: GET /todo/detail?_id=... → todoDetail.ejs
-    •	트래킹 항목:
+    • 목록: GET /todo/list → todoList.ejs
+    • 입력폼: GET /todo/input → todoInput.ejs
+    • 상세: GET /todo/detail?_id=... → todoDetail.ejs
+    • 트래킹 항목:
       - 추가 POST /todo/props/add
       - 수정 POST /todo/props/update
       - 삭제 POST /todo/props/delete
-    •	완료 토글: POST /todo/toggle
-    •	할 일 목록 삭제: POST /todo/delete
-    •	달력: GET /calendar
+    • 완료 토글: POST /todo/toggle
+    • 할 일 목록 삭제: POST /todo/delete
+    • 달력: GET /calendar
 
-## 📂 프로젝트 구조
+## 파일 구조
       HabiDo_Application/
       ├── app.js
       ├── package.json
@@ -79,18 +79,18 @@
 
 
 ## 화면 리뷰
-    •	홈 뷰 : 동기부여 제공하는 페이지와 iframe 작은 달력으로 일정 시각화
-      ![메인화면](./wepages/home.달력.png)
-      ![메인화면:일정목록](./wepages/home.list시각화.png)
-    •	리스트 뷰 : 할 일 목록 확인 및 완료 체크
-      ![할 일 목록](./wepages/todoList.png)
-    •	상세 뷰 : 속성 관리 및 기간 선택
-      ![속성: 기간선정](./wepages/todoDetail.기간선정.png)
-      ![속성: 요일체크](./wepages/todoDetail.요일트래킹.png)
-    •	달력 뷰 : 일정 시각화
-      ![달력](./wepages/calendar.png)
-    •	목록추가 뷰 : 할 일 목록 추가
-      ![목록 추가/생성](./wepages/todoInput.png)
+    • 홈 뷰 : 동기부여 제공하는 페이지와 iframe 작은 달력으로 일정 시각화
+      	![메인화면](./wepages/home.달력.png)
+      	![메인화면:일정목록](./wepages/home.list시각화.png)
+    • 리스트 뷰 : 할 일 목록 확인 및 완료 체크
+      	![할 일 목록](./wepages/todoList.png)
+    • 상세 뷰 : 속성 관리 및 기간 선택
+      	![속성: 기간선정](./wepages/todoDetail.기간선정.png)
+      	![속성: 요일체크](./wepages/todoDetail.요일트래킹.png)
+    • 달력 뷰 : 일정 시각화
+      	![달력](./wepages/calendar.png)
+    • 목록추가 뷰 : 할 일 목록 추가
+      	![목록 추가/생성](./wepages/todoInput.png)
 
 ## 확장 및 개선 안 
     • 사용자 로그인 & 개별 계정 Todo 관리
@@ -99,5 +99,5 @@
     • 캘린더 뷰 개선(정렬, 완료목록, 좌측/우측 사이드 메뉴 활용 등)
 
   👩‍💻 제작자
-	•	양소라 (@Yang Sora)
-		: 디자인 기획, 프론트엔드, 백엔드, 데이터 설계
+	• 양소라 (@Yang Sora)
+	  : 디자인 기획, 프론트엔드, 백엔드, 데이터 설계
