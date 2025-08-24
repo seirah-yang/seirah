@@ -1,0 +1,211 @@
+
+<style>
+  :root {
+    /* 다크 블루(클리프) 팔레트 */
+    --primary: #153E75;
+    --primary-dark: #0F2F59;
+
+    --text: #1F2937;
+    --muted: #6B7280;
+    --card: #ffffff;
+    --bg: #F5F7FB;
+
+    --radius: 14px;
+    --shadow: 0 10px 28px rgba(0,0,0,.06);
+  }
+
+  /* Layout */
+  body { background: var(--bg); color: var(--text); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
+  .grid-1, .grid-2 { display: grid; gap: 20px; grid-template-columns: 1fr; justify-items: center; }
+  .mt { margin-top: 22px; }
+  .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px; width: min(100%, 900px); }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 10px;
+         border: 2px solid transparent; text-decoration: none; font-weight: 700; transition: .2s; }
+  .btn--primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn--primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+  .btn--outline { border-color: #D1D5DB; color: var(--text); background: #fff; }
+  .btn--outline:hover { border-color: #9CA3AF; }
+  .btn-lg { font-size: 18px; }
+
+  /* Text & lists */
+  .menu-link { color: var(--primary); font-weight: 700; }
+  .muted { color: var(--muted); }
+  .list { list-style: none; padding-left: 0; margin: 0; }
+  .list--spacious li { margin: 10px 0; }
+
+  /* Utility rows */
+  .row { display: flex; align-items: center; gap: 10px; }
+  .row.wrap { flex-wrap: wrap; }
+  .gap-12 { gap: 10px; }
+  .between { justify-content: space-between; }
+
+  /* Hero */
+  .wave { display: inline-block; transform-origin: 70% 70%; }
+  .hero-title { font-size: 26px; margin: 0 0 6px; }
+  .hero-sub { margin: 0 0 18px; color: var(--muted); }
+
+  /* Logo */
+  .habido-logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; font-size: 24px; }
+  .habido-logo__icon { width: 36px; height: 36px; }
+  .habido-logo small { display: block; color: var(--muted); font-weight: 800; font-size: 14px; }
+
+  /* Top navigation (local for hero) */
+  .main-nav { display: flex; gap: 25px; align-items: center; justify-content: flex-end; }
+  .main-nav a { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 17px; }
+
+  /* 100-day habit gauge */
+  .habit-box { margin-top: 14px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 12px; padding: 16px; }
+  .bar-wrap { position: relative; height: 12px; background: #E5E7EB; border-radius: 999px; overflow: hidden; }
+  .bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); transition: width .6s ease; border-radius: 999px; }
+  .tick { position: absolute; top: -8px; width: 2px; height: 28px; background: #9CA3AF; }
+  .tick-label { position: absolute; top: 22px; font-size: 12px; color: #6B7280; transform: translateX(-50%); }
+  .label-row { display: flex; justify-content: space-between; font-size: 12px; color: #6B7280; margin-top: 8px; }
+
+  /* Calendar iframe */
+  .iframe-calendar { width: 100%; min-height: 420px; border: 1px solid #E5E7EB; border-radius: 12px; }
+
+  /* Legacy line hard-hide (if remains) */
+  .legacy-topline { display: none !important; }
+
+  @media (max-width: 768px) {
+    .card { width: 100%; }
+    .main-nav { display: none; } 
+  }
+</style>
+
+<main class="container">
+  <!-- HERO / Logo + Local Nav-->
+  <section class="grid-1 mt">
+    <div class="card">
+      <div class="row between">
+        <!-- Logo -->
+        <span style="margin-left: 20px;" class="habido-logo">
+          <svg viewBox="0 0 36 36" class="habido-logo__icon" aria-hidden="true">
+            <defs>
+              <linearGradient id="hbdGrad2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#153E75"/>
+                <stop offset="100%" stop-color="#0F2F59"/>
+              </linearGradient>
+            </defs>
+            <circle cx="18" cy="18" r="18" fill="url(#hbdGrad2)"/>
+            <rect x="10" y="9"  width="4" height="18" rx="2" fill="#fff" opacity="0.95"/>
+            <rect x="22" y="9"  width="4" height="18" rx="2" fill="#fff" opacity="0.95"/>
+            <path d="M12 18 l4 4 l8 -8" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div style="font-size: 40px;">
+            <strong>HabiDo</strong>
+            <small>Todo & Habit Tracker</small>
+          </div>
+        </span>
+
+        <!-- Local nav -->
+        <nav style="float: right; margin-left: 250px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;" class="main-nav">
+
+        <a href="/calendar"   class="<%= active === 'cal'   ? 'active' : '' %>">달력 확인</a>
+        <a href="/todo/list"  class="<%= active === 'list'  ? 'active' : '' %>">할 일 목록</a>
+        <a href="/todo/input" class="<%= active === 'input' ? 'active' : '' %>">할 일 추가</a>
+        </nav>
+
+      </div>
+      
+      <h1 style="margin-top: 80px; margin-bottom: 20px; text-align: center;" class="hero-title">매일 할 일과 습관을 한눈에 정리하고, 나를 가꾸는 힘!</h1>
+      <p style="text-align: center;" class="hero-sub">
+        연구에 따르면 습관 자동화는 평균 <b>66일</b>부터 가속됩니다. <br>
+        자신에게 맞춰 <b>100일</b>을 이정표 삼아 지속적으로 습관을 트래킹할 수 있게 설계했습니다.
+      </p>
+
+      <!-- Actions -->
+      <div class="row gap-12 wrap mt">
+        <button class="btn btn--primary btn-lg; wave" onclick="location.href='/todo/input'">시작하기</button>
+        <a class="btn btn--primary" href="/calendar">달력 열기</a>
+        <a class="btn btn--outline" href="/todo/list">목록 보기</a>
+      </div>
+
+      <!-- 100-day gauge -->
+      <div class="habit-box">
+        <div class="row between" style="margin-bottom: 6px;">
+          <strong>100일 습관 게이지</strong>
+          <span class="muted"><span id="habitDays">0</span>일 연속</span>
+        </div>
+
+        <div class="bar-wrap" aria-label="습관 진행 게이지 0~100일">
+          <div class="bar" id="habitBar"></div>
+          <span class="tick" style="left:66%"></span>
+          <span class="tick-label" style="left:66%">66일</span>
+          <span class="tick" style="left:100%"></span>
+          <span class="tick-label" style="left:100%">100일</span>
+        </div>
+
+        <div class="label-row">
+          <span>시작</span>
+          <span>자동화가 붙기 시작</span>
+          <span>일상으로 전환</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendar section -->
+  <section class="grid-2 mt">
+    <div class="card">
+      <div style="margin-bottom: 20px;" class="row gap-12 mt">
+        <a style="height: 24px;" class="btn btn--primary" href="/calendar" style="height:38px;">달력 열기</a>
+        <a style="height: 24px; background-color: white; color: #050d19;" class="btn btn--primary" href="/todo/input" style="height:38px;">일정 추가</a>
+      </div>
+
+      <!-- 임베드 모드(상단 타이틀 숨김) -->
+      <iframe
+        id="calendarFrame"
+        class="iframe-calendar"
+        src="/calendar?embed=1"
+        loading="lazy"
+        title="월간 달력">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Footer (plain) -->
+  <footer style="margin: 28px 0 14px; text-align: center; color: var(--muted);">
+    <p style="font-size:14px;">©️ 2025 HabiDo — Todo & Habit Tracker</p>
+    <p style="font-size:13px; color: gray;"><b>Contact</b> | 📨 E-mail: nftsgsrz3@gmail</p>
+    <p style="font-size:11px; color: rgb(158,158,158);">
+      🔧 프로젝트는 Node.js와 Express로 할 일 & 습관 추적을 구현합니다.
+    </p>
+  </footer>
+</main>
+
+<script>
+  // 습관 게이지: 서버에서 streakDays를 넘겨주면 반영 (없으면 0)
+  (function () {
+    const days = <%= typeof streakDays !== 'undefined' ? Number(streakDays) : 0 %>;
+    const capped = Math.max(0, Math.min(days, 100)); // 0~100 제한
+    const bar = document.getElementById('habitBar');
+    document.getElementById('habitDays').textContent = days;
+    if (bar) requestAnimationFrame(() => bar.style.width = capped + '%');
+  })();
+
+  // 달력 iframe 자동 높이(동일 도메인 전제)
+  (function autoSizeCalendar () {
+    const ifr = document.getElementById('calendarFrame');
+    if (!ifr) return;
+
+    function resize () {
+      try {
+        const doc = ifr.contentWindow.document;
+        const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight, 600);
+        ifr.style.height = h + 'px';
+      } catch (e) {
+      }
+    }
+
+    ifr.addEventListener('load', () => {
+      resize();
+
+      let n = 0;
+      const t = setInterval(() => { resize(); if (++n > 6) clearInterval(t); }, 300);
+    });
+  })();
+</script>

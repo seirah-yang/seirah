@@ -1,0 +1,46 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+
+
+
+<div class="container">
+    <section class="card">
+    <h1 style="margin:0 0 20px 0;">할 일 추가</h1>
+    <form id="mainForm" method="post" action="/todo/input">
+    <div class="input-row">
+    <div class="input-container">
+    <label  for="title">제목</label>
+    <input id="title" class="input" type="text" name="title" placeholder="할 일을 입력하세요" required />
+    </div>
+
+    <div style="margin-top: 20px;" class="input-container">
+    <label for="dueDate">마감일<small> (*생략가능)</small></label>
+    <input id="dueDate" class="input" type="date" name="dueDate" />
+    </div>
+
+    <div style="margin-top: 20px;" class="input-container">
+    <label for="tags">#태그</label>
+    <input id="tags" class="input" type="text" name="tags" placeholder="예: 독서,운동,과제" />
+    </div>
+    </div>
+
+
+
+<label class="checkbox" style="margin-top: 20px;">
+<input style="margin-top: 20px;" type="checkbox" name="done" value="true" />
+<span style="margin-top: 20px;">완료 목록에 추가</span>
+</label>
+
+<label class="grid__full" style="margin-top: 20px;">
+<textarea style="margin-top: 10px;" class="input" name="memo" rows="8" placeholder="메모(상세내용을 기재해 주세요)"></textarea>
+</label>
+
+<div class="row gap mt">
+<button style="font-size: 20px; height: 48px;" class="btn btn-primary btn-danger" type="submit">추가</button>
+<a style="height:48px;" class="btn btn-outline" href="/todo/detail?_id=<%= %>">속성</a>
+</div>
+</form>
+</section>
+</div>
+
+<%- include('partials/_footer') %>

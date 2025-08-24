@@ -1,0 +1,15 @@
+📦 todo-tracker-app
+┣ 📂 public
+┃ ┣ 📂 css
+┃ ┃ ┗ styles.css
+┃ ┗ 📂 js
+┣ 📂 views
+┃ ┣ 📂 partials
+┃ ┃ ┣ _head.ejs
+┃ ┃ ┗ _nav.ejs
+┃ ┣ todoList.ejs
+┃ ┣ todoInput.ejs
+┃ ┗ todoDetail.ejs
+┣ app.js
+┣ package.json
+┗ README.md

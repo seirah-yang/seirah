@@ -1,0 +1,105 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+
+<style>
+  .cal-nav{display:flex;align-items:center;justify-content:center;gap:14px;margin:10px 0 20px}
+  .cal-nav h2{margin:0;font-size:20px;font-weight:800}
+
+  .cal{display:grid;grid-template-columns:repeat(7, minmax(110px,1fr));gap:6px}
+  .cal--header{margin-bottom:8px}
+  .cal--header > div{
+    text-align:center;padding:10px 6px;background:#f3f5f8;border-radius:10px;
+    font-weight:700;color:#405065
+  }
+
+  .cal--body{grid-auto-rows:1fr}
+  .cal__cell{
+    background:#fff;border:1px solid #e7ebf0;border-radius:12px;min-height:80px;
+    padding:10px;display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.03)
+  }
+  .cal__cell--empty{background:transparent;border:1px dashed #e7ebf0;min-height:80px}
+
+  .cal__day{font-weight:800;color:#2b3b52}
+  .cal__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+  .cal__item a{color:#334155;text-decoration:none}
+  .cal__item a:hover{text-decoration:underline}
+  .cal__dot{
+    display:inline-block;width:7px;height:7px;border-radius:50%;background:#cbd5e1;margin-right:6px
+  }
+  .cal__dot.is-done{background:#10b981}
+  .cal__badge{
+    margin-left:auto;margin-top:auto;background:#eef2ff;color:#4338ca;border-radius:999px;
+    padding:4px 10px;font-weight:700
+  }
+
+  @media (max-width: 900px){
+    .cal{grid-template-columns:repeat(7, minmax(60px,1fr))}
+    .cal__cell,.cal__cell--empty{min-height:90px}
+  }
+</style>
+
+<div class="container">
+  <section class="card">
+    <% 
+      const prevYear  = (month === 1)  ? year - 1 : year;
+      const prevMonth = (month === 1)  ? 12       : month - 1;
+      const nextYear  = (month === 12) ? year + 1 : year;
+      const nextMonth = (month === 12) ? 1        : month + 1;
+    %>
+
+    <div class="cal-nav">
+      <a href="/calendar?year=<%= prevYear %>&month=<%= prevMonth %>">◀</a>
+      <h2><%= year %>년 <%= month %>월</h2>
+      <a href="/calendar?year=<%= nextYear %>&month=<%= nextMonth %>">▶</a>
+    </div>
+
+    <div class="cal cal--header">
+      <div>일</div><div>월</div><div>화</div>
+      <div>수</div><div>목</div><div>금</div><div>토</div>
+    </div>
+
+    <div class="cal cal--body">
+      <% 
+        // 앞쪽 패딩(1일 이전 빈칸)
+        const startPad = first.getDay();
+        for (let i = 0; i < startPad; i++) { 
+      %>
+        <div class="cal__cell cal__cell--empty"></div>
+      <% } %>
+
+      <% 
+
+        for (let d = 1; d <= last.getDate(); d++) {
+          const cur   = new Date(year, month - 1, d);
+          const key   = toYMD(cur);
+          const items = map[key] || [];
+      %>
+        <div class="cal__cell">
+          <div class="cal__day"><%= d %></div>
+
+          <% if (!compact) { %>
+            <ul class="cal__list">
+              <% items.forEach(t => { %>
+                <li class="cal__item">
+                  <span class="cal__dot <%= t.done ? 'is-done' : '' %>"></span>
+                  <a href="/todo/detail?_id=<%= t._id %>"><%- t.title %></a>
+                </li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <div class="cal__badge"><%= items.length %></div>
+          <% } %>
+        </div>
+      <% } %>
+
+      <% 
+        const totalCells = startPad + last.getDate();
+        const endPad = (7 - (totalCells % 7)) % 7;
+        for (let i = 0; i < endPad; i++) {
+      %>
+        <div class="cal__cell cal__cell--empty"></div>
+      <% } %>
+    </div>
+  </section>
+</div>
+<%- include('partials/_footer') %>

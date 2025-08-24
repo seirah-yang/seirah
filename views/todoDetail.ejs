@@ -1,0 +1,412 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+
+<!-- Flatpickr (date-range picker) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
+
+<style>
+  /* 요일 칩 토글 */
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid #d0d4da;border-radius:10px;cursor:pointer;user-select:none}
+  .chip.active{background:#e8f7ee;border-color:#bfe7cf}
+  .chip .dot{width:10px;height:10px;border-radius:50%;background:#aaa}
+  .chip.active .dot{background:#10b981}
+  .chip-group{display:flex;gap:10px;flex-wrap:wrap}
+  .input[readonly]{background:#fafafa;cursor:pointer}
+</style>
+
+<div class="container">
+  <section class="card">
+    <div class="card__title">To do & Track</div>
+
+    <form id="mainForm" method="post" action="/todo/save">
+      <input type="hidden" name="_id" value="<%= todo._id %>" />
+
+      <div class="row gap" style="flex-wrap:wrap">
+        <div style="flex:1 1 320px">
+          <label>제목</label>
+          <input class="input" name="title" value="<%- todo.title %>" required />
+        </div>
+
+        <div style="flex:1 1 240px">
+          <label>마감일</label>
+          <input
+            class="input"
+            type="date"
+            name="dueDate"
+            value="<%= todo.dueDate ? toYMD(new Date(todo.dueDate)) : '' %>"
+          />
+        </div>
+
+        <div style="flex:1 1 320px">
+          <label>#태그</label>
+          <input
+            class="input"
+            name="tags"
+            value="<%- (todo.tags || []).join(', ') %>"
+            placeholder="예: 독서,운동,과제"
+          />
+        </div>
+
+        <label class="row gap" style="align-items:center">
+          <input type="checkbox" name="done" value="on" <%= todo.done ? 'checked' : '' %> />
+          <span>완료</span>
+        </label>
+
+        <div style="flex:1 1 100%">
+          <label style="margin-bottom:20px;">메모</label>
+          <textarea
+            class="input"
+            name="memo"
+            rows="8"
+            placeholder="상세내용을 기재해 주세요"
+          ><%- todo.memo || '' %></textarea>
+        </div>
+      </div>
+
+      <div class="row gap mt">
+        <button class="btn btn-primary" type="submit">저장</button>
+        <button class="btn btn-danger js-del-todo" type="button" data-id="<%= todo._id %>">
+          삭제
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ======================= Tracking ======================= -->
+  <section class="card mt">
+    <div class="card__title">Tracking</div>
+
+    <ul id="propList" class="list">
+      <% (todo.props || []).forEach(function (p) {
+           const _done   = typeof p.done   === 'boolean' ? p.done   : false;
+           const _status = typeof p.status === 'string'  ? p.status : '진행중';
+           const _note   = typeof p.note   === 'string'  ? p.note   : '';
+           const _detail = typeof p.detail === 'string'  ? p.detail : '';
+           const _wds    = Array.isArray(p.weekdays) ? p.weekdays : [];
+           const _sd     = p.startDate ? new Date(p.startDate) : null;
+           const _ed     = p.endDate   ? new Date(p.endDate)   : null;
+           const _periodDisplay =
+             (_sd && _ed) ? `${toYMD(_sd).replaceAll('-','.')}. ~ ${toYMD(_ed).replaceAll('-','.')}.` : '';
+      %>
+        <li class="todo" data-prop-id="<%= p._id %>">
+          <div class="todo-main" style="flex:1 1 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <div class="todo-title" style="min-width:60px"><%- p.name %></div>
+
+            <!-- 완료 토글 -->
+            <label class="row gap" style="align-items:center">
+              <input type="checkbox" class="prop-done" data-prop-id="<%= p._id %>" <%= _done ? 'checked' : '' %> />
+              <span>완료</span>
+            </label>
+
+            <!-- 상태 -->
+            <select class="input prop-status" style="max-width:160px" data-prop-id="<%= p._id %>">
+              <option value="Done"       <%= _status==='Done' ? 'selected' : '' %>>완료</option>
+              <option value="일정 확정"  <%= _status==='일정 확정' ? 'selected' : '' %>>일정확정</option>
+              <option value="일정 취소"  <%= _status==='일정 취소' ? 'selected' : '' %>>일정취소</option>
+              <option value="일정 변경"  <%= _status==='일정 변경' ? 'selected' : '' %>>일정변경</option>
+              <option value="진행중"     <%= _status==='진행중' ? 'selected' : '' %>>진행중</option>
+              <option value="기타"       <%= _status==='기타' ? 'selected' : '' %>>기타</option>
+            </select>
+
+            <!-- 세부 속성 -->
+            <select class="input prop-detail" data-prop-id="<%= p._id %>" style="max-width:180px">
+              <option value="">세부 속성 선택</option>
+              <option value="계획 수립" <%= _detail==='계획 수립' ? 'selected' : '' %>>계획 수립</option>
+              <option value="자료 수집" <%= _detail==='자료 수집' ? 'selected' : '' %>>자료 수집</option>
+              <option value="미팅/조율" <%= _detail==='미팅/조율' ? 'selected' : '' %>>미팅/조율</option>
+              <option value="주 ()일"   <%= _detail==='주 ()일'   ? 'selected' : '' %>>주 ()일</option>
+              <option value="격주"     <%= _detail==='격주'     ? 'selected' : '' %>>격주</option>
+              <option value="월 ()일"   <%= _detail==='월 ()일'   ? 'selected' : '' %>>월 ()일</option>
+            </select>
+
+            <!-- 기간(히든) -->
+            <input type="hidden" class="prop-start" data-prop-id="<%= p._id %>" value="<%= _sd ? toYMD(_sd) : '' %>" />
+            <input type="hidden" class="prop-end"   data-prop-id="<%= p._id %>" value="<%= _ed ? toYMD(_ed) : '' %>" />
+
+            <!-- 기타 메모 -->
+            <input
+              class="input prop-note"
+              style="max-width:220px;<%= _status==='기타' ? '' : 'display:none' %>"
+              data-prop-id="<%= p._id %>"
+              placeholder="기타: 메모를 입력하세요"
+              value="<%- _status==='기타' ? _note : '' %>"
+            />
+
+            <!-- 요일(칩) -->
+            <div class="chip-group" data-prop-id="<%= p._id %>">
+              <% const DAYS = [
+                   {k:'Mon',t:'월'},{k:'Tue',t:'화'},{k:'Wed',t:'수'},
+                   {k:'Thu',t:'목'},{k:'Fri',t:'금'},{k:'Sat',t:'토'},{k:'Sun',t:'일'}
+                 ]; %>
+              <% DAYS.forEach(d => { const on = _wds.includes(d.k); %>
+                <div class="chip <%= on ? 'active' : '' %>" data-day="<%= d.k %>">
+                  <span><%= d.t %></span><span class="dot"></span>
+                </div>
+              <% }) %>
+            </div>
+
+            <!-- 기간 표시/선택 -->
+            <input
+              class="input prop-period"
+              data-prop-id="<%= p._id %>"
+              type="text"
+              readonly
+              style="max-width:220px"
+              placeholder="기간 선택"
+              value="<%- _periodDisplay %>"
+            />
+          </div>
+
+          <div class="row gap">
+            <button type="button" class="btn prop-save" data-id="<%= p._id %>">저장</button>
+            <button type="button" class="btn btn-danger prop-del" data-id="<%= p._id %>">삭제</button>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+
+    <!-- 추가 폼 -->
+    <form id="propAdd" class="row gap mt" style="flex-wrap:wrap;align-items:center">
+      <input type="hidden" name="_id" value="<%= todo._id %>" />
+
+      <input class="input" style="flex:1 1 150px" name="name" placeholder="속성명(예: 1주차)" required />
+
+      <select class="input" style="flex:1 1 120px" name="status" required>
+        <option value="">상태 선택</option>
+        <option value="Done">완료</option>
+        <option value="일정 확정">일정확정</option>
+        <option value="일정 취소">일정취소</option>
+        <option value="일정 변경">일정변경</option>
+        <option value="진행중" selected>진행중</option>
+        <option value="기타">기타</option>
+      </select>
+
+      <!-- 세부 속성 -->
+      <select class="input" style="flex:1 1 160px" name="detail" id="add-detail">
+        <option value="">세부 속성 선택</option>
+        <option value="계획 수립">계획수립</option>
+        <option value="자료 수집">자료수집</option>
+        <option value="미팅/조율">미팅/조율</option>
+        <option value="텍스트; 매주">주 ()일</option>
+        <option value="텍스트; 격주">격주</option>
+        <option value="텍스트; 매월">월 ()일</option>
+        <option value="텍스트">기타</option>
+      </select>
+
+      <!-- '기타' 선택 시 노출 -->
+      <input
+        class="input"
+        name="detailNote"
+        id="add-detail-note"
+        style="flex:2 1 200px;display:none"
+        placeholder="기타: 메모를 입력하세요"
+      />
+
+      <!-- 기간(달력) -->
+      <input class="input" id="add-period" type="text" readonly style="flex:1 1 200px" placeholder="기간 선택" />
+      <input type="hidden" name="startDate" id="add-start" />
+      <input type="hidden" name="endDate"   id="add-end" />
+
+      <input class="input" style="flex:2 1 240px" name="note" placeholder="메모(기타 선택 시)" />
+      <button type="submit" class="btn btn-outline">추가</button>
+    </form>
+  </section>
+</div>
+
+<script>
+  const todoId = "<%= todo._id %>";
+
+
+  const fmt  = d => (d ? d.toISOString().slice(0, 10) : ''); // YYYY-MM-DD
+  const disp = (s, e) => (s && e) ? s.replaceAll('-', '.') + '. ~ ' + e.replaceAll('-', '.') + '.' : '';
+
+
+  const detailSel  = document.getElementById('add-detail');
+  const detailNote = document.getElementById('add-detail-note');
+  if (detailSel && detailNote) {
+    detailSel.addEventListener('change', () => {
+      if (detailSel.value === '텍스트') detailNote.style.display = '';
+      else { detailNote.style.display = 'none'; detailNote.value = ''; }
+    });
+  }
+
+
+  document.getElementById('propAdd').addEventListener('submit', function () {
+    if (detailSel?.value === '텍스트' && detailNote.value.trim()) {
+      detailSel.value = detailNote.value.trim();
+    }
+  });
+
+
+  function bindChipGroup(groupEl) {
+    if (!groupEl) return;
+    groupEl.addEventListener('click', (e) => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      chip.classList.toggle('active');
+    });
+  }
+  document.querySelectorAll('.chip-group').forEach(bindChipGroup);
+
+  // 기간 range picker (기존 항목)
+  function initRangeForItem(input) {
+    const pid        = input.dataset.propId;
+    const startInput = document.querySelector(`.prop-start[data-prop-id="${pid}"]`);
+    const endInput   = document.querySelector(`.prop-end[data-prop-id="${pid}"]`);
+
+    const defaults = [];
+    if (startInput?.value) defaults.push(startInput.value);
+    if (endInput?.value)   defaults.push(endInput.value);
+
+    flatpickr(input, {
+      mode: 'range',
+      locale: 'ko',
+      dateFormat: 'Y-m-d',
+      defaultDate: defaults,
+      onChange: (selectedDates) => {
+        const s = fmt(selectedDates[0]);
+        const e = fmt(selectedDates[1]);
+        if (startInput) startInput.value = s || '';
+        if (endInput)   endInput.value   = e || '';
+        input.value = disp(s, e);
+      },
+    });
+  }
+  document.querySelectorAll('.prop-period').forEach(initRangeForItem);
+
+
+  (function initAddRange() {
+    const addPeriod = document.getElementById('add-period');
+    if (!addPeriod) return;
+    const addStart = document.getElementById('add-start');
+    const addEnd   = document.getElementById('add-end');
+
+    flatpickr(addPeriod, {
+      mode: 'range',
+      locale: 'ko',
+      dateFormat: 'Y-m-d',
+      onChange: (selectedDates) => {
+        const s = fmt(selectedDates[0]);
+        const e = fmt(selectedDates[1]);
+        addStart.value   = s || '';
+        addEnd.value     = e || '';
+        addPeriod.value  = disp(s, e);
+      },
+    });
+  })();
+
+  // 상태 변경 시 기타 메모 토글
+  document.querySelectorAll('.prop-status').forEach((sel) => {
+    sel.addEventListener('change', () => {
+      const pid = sel.dataset.propId;
+      const noteInput = document.querySelector(`.prop-note[data-prop-id="${pid}"]`);
+      if (!noteInput) return;
+      if (sel.value === '기타') noteInput.style.display = '';
+      else { noteInput.style.display = 'none'; noteInput.value = ''; }
+    });
+  });
+
+  // 개별 저장
+  document.querySelectorAll('.prop-save').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const propId = btn.dataset.id;
+      const done   = document.querySelector(`.prop-done[data-prop-id="${propId}"]`)?.checked || false;
+      const status = document.querySelector(`.prop-status[data-prop-id="${propId}"]`)?.value   || '진행중';
+      const detail = document.querySelector(`.prop-detail[data-prop-id="${propId}"]`)?.value   || '';
+
+      const startDate = document.querySelector(`.prop-start[data-prop-id="${propId}"]`)?.value || '';
+      const endDate   = document.querySelector(`.prop-end[data-prop-id="${propId}"]`)?.value   || '';
+
+      const noteEl = document.querySelector(`.prop-note[data-prop-id="${propId}"]`);
+      const note   = (status === '기타') ? (noteEl?.value || '') : '';
+
+      const weekdays = Array.from(
+        document.querySelectorAll(`.chip-group[data-prop-id="${propId}"] .chip.active`)
+      ).map(c => c.dataset.day);
+
+      try {
+        const r = await fetch('/todo/props/update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ _id: todoId, propId, done, status, note, detail, weekdays, startDate, endDate }),
+        });
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok || !data.ok) throw new Error(data.error || '수정 실패');
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+  });
+
+  // 항목 삭제
+  document.querySelectorAll('.prop-del').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('해당 Tracking 항목을 삭제할까요?')) return;
+      const propId = btn.dataset.id;
+      try {
+        const r = await fetch('/todo/props/delete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ _id: todoId, propId }),
+        });
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok || !data.ok) throw new Error(data.error || '삭제 실패');
+        btn.closest('.todo')?.remove();
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+  });
+
+  // 상단 폼 저장
+  document.getElementById('mainForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd   = new FormData(e.target);
+    const body = Object.fromEntries(fd.entries());
+    body.done  = !!fd.get('done');
+
+    try {
+      const r = await fetch('/todo/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || '저장 실패');
+      alert('저장되었습니다.');
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  // Todo 삭제
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.js-del-todo');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (!id) return;
+    if (!confirm('이 할 일을 삭제할까요?')) return;
+
+    btn.disabled = true;
+    try {
+      const r = await fetch('/todo/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json',
+        },
+        body: new URLSearchParams({ _id: id }).toString(),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) throw new Error(data.error || '삭제 실패');
+      location.href = '/todo/list';
+    } catch (err) {
+      alert(err.message);
+      btn.disabled = false;
+    }
+  });
+</script>
+
+<%- include('partials/_footer') %>

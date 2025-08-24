@@ -1,23 +1,22 @@
 {
-  "name": "git_study",
+  "name": "node_quickstart",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/seirah-yang/seirah.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/seirah-yang/seirah/issues"
-  },
-  "homepage": "https://github.com/seirah-yang/seirah#readme",
-  "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.17.1",
+    "ejs": "^3.1.10"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
   }
 }

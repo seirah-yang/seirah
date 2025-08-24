@@ -1,0 +1,16 @@
+<header style="height: 150px;">
+  <nav>
+    <div class="container row">
+  <a href="/home"><img src="/images/logo.png" style="width: 160px; height: auto;" alt="Brand Logo"></a>
+      <div style="font-size:20px; font-weight:700; color:#153E75;" class="nav-links">
+        <a href="/home"       class="<%= active === 'home'  ? 'active' : '' %>">홈</a>
+        <a href="/calendar"   class="<%= active === 'cal'   ? 'active' : '' %>">|&nbsp;캘린더</a>
+        <a href="/todo/list" class="<%= active === 'list' ? 'active' : '' %>">|&nbsp;목록</a>
+        <a href="/todo/input" class="<%= active === 'form' ? 'active' : '' %>">|&nbsp;추가</a>
+        <% if (typeof todo !== 'undefined' && todo) { %>
+          <a href="/todo/detail?_id=<%= todo._id %>" class="<%= active === 'detail' ? 'active' : '' %>">|&nbsp;속성</a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+</header>

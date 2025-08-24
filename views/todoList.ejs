@@ -1,0 +1,97 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+
+
+
+<div class="container">
+<section class="card">
+
+<h1 style="margin:0 0 10px 0;">Todo List</h1>
+    <form class="row gap" method="get" action="/todo/list" style="flex-wrap:wrap;margin-bottom:14px">
+    <input class="input" style="flex:1 1 260px" type="text" name="query" placeholder="검색: 키워드" value="<%= q || '' %>">
+    <input class="input" style="flex:1 1 260px" type="text" name="tag" placeholder="검색: # 태그" value="<%= tag || '' %>">
+    <label style="margin-top:15px;" class="row gap" style="align-items:center">
+    </label>
+    
+<button style="height: 46px;" class="btn btn-outline" type="submit">🔎</button>
+<a style="height:auto; height: 46px;" class="btn btn-outline" href="/todo/input"><small>목록추가</small> Go ➡️</a>
+</form>
+
+
+
+<ul style="margin-left:5px; margin-right: 5px;" class="list">
+    <% (todoList || []).forEach(function(t){ %>
+    <li class="todo" data-id="<%= t._id %>">
+    <form class="toggle-form" action="/todo/toggle" method="post" style="margin-right:16px; display:inline-block;">
+<input type="hidden" name="_id" value="<%= t._id %>">
+<input id="chk-<%= t._id %>" type="checkbox" name="done" class="todo-check" <%= t.done ? 'checked' : '' %> >
+<label for="chk-<%= t._id %>" class="todo-box" title="완료 토글"></label>
+</form>
+
+<div class="todo-main">
+    <div class="todo-title <%= t.done ? 'is-done' : '' %>"><%- t.title %></div>
+    <span class="badge"><%= t.dueDate ? toYMD(new Date(t.dueDate)) : '-' %></span>
+    <% (t.tags || []).forEach(function(x){ %>
+    <span class="tag">#<%- x %></span>
+    <% }) %>
+    </div>
+
+<div class="todo-actions row gap">
+<a style="height: 46px;" class="btn btn-outline" href="/todo/detail?_id=<%= t._id %>">속성관리</a>
+<button style="height: 46px;" type="button" class="btn btn-danger js-del" data-id="<%= t._id %>">삭제</button>
+</div>
+</li>
+<% }) %>
+</ul>
+</section>
+</div>
+
+<script>
+    document.addEventListener('change', async (e) => {
+    const cb = e.target.closest('.todo-check');
+        if (!cb) return;
+    const form = cb.closest('.toggle-form');
+    const id = form.querySelector('input[name="_id"]').value;
+    const done = cb.checked ? 'on' : '';
+
+try {
+        const r = await fetch('/todo/toggle', {
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded','X-Requested-With':'XMLHttpRequest','Accept':'application/json'},
+        body: new URLSearchParams({ _id:id, done }).toString()
+    });
+    const data = await r.json();
+        if (!r.ok || !data.ok) throw new Error(data.error || 'toggle failed');
+    const title = form.parentElement.querySelector('.todo-title');
+        if (title) title.classList.toggle('is-done', data.done === true);
+    } catch (err) {
+    alert('체크 변경 실패: ' + err.message);
+    cb.checked = !cb.checked;
+}
+});
+    document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.js-del');
+        if (!btn) return;
+    const id = btn.dataset.id;
+        if (!id) return;    
+        if (!confirm('정말 삭제할까요?')) return;
+    btn.disabled = true;
+
+try {
+    const r = await fetch('/todo/delete', {
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded','X-Requested-With':'XMLHttpRequest','Accept':'application/json'},
+    body: new URLSearchParams({ _id:id }).toString()
+    });
+    const data = await r.json();
+        if (!r.ok || !data.ok) throw new Error(data.error || '삭제 실패');
+            const li = btn.closest('.todo');
+        if (li){ li.classList.add('fade-out'); setTimeout(()=>li.remove(), 200); }
+        } catch (err) {
+    alert('삭제 실패: ' + err.message);
+    btn.disabled = false;
+    }
+});
+</script>
+
+<%- include('partials/_footer') %>
