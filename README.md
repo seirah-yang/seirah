@@ -80,17 +80,17 @@
 
 ## 화면 리뷰
     • 홈 뷰 : 동기부여 제공하는 페이지와 iframe 작은 달력으로 일정 시각화
-      	![메인화면](./wepages/home.달력.png)
-      	![메인화면:일정목록](./wepages/home.list시각화.png)
+      	![메인화면](../wepages/home.달력.png)
+      	![메인화면:일정목록](../wepages/home.list시각화.png)
     • 리스트 뷰 : 할 일 목록 확인 및 완료 체크
-      	![할 일 목록](./wepages/todoList.png)
+      	![할 일 목록](../wepages/todoList.png)
     • 상세 뷰 : 속성 관리 및 기간 선택
-      	![속성: 기간선정](./wepages/todoDetail.기간선정.png)
-      	![속성: 요일체크](./wepages/todoDetail.요일트래킹.png)
+      	![속성: 기간선정](../wepages/todoDetail.기간선정.png)
+      	![속성: 요일체크](../wepages/todoDetail.요일트래킹.png)
     • 달력 뷰 : 일정 시각화
-      	![달력](./wepages/calendar.png)
+      	![달력](../wepages/calendar.png)
     • 목록추가 뷰 : 할 일 목록 추가
-      	![목록 추가/생성](./wepages/todoInput.png)
+      	![목록 추가/생성](../wepages/todoInput.png)
 
 ## 확장 및 개선 안 
     • 사용자 로그인 & 개별 계정 Todo 관리
