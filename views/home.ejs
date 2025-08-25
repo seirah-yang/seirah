@@ -36,7 +36,6 @@
   .list { list-style: none; padding-left: 0; margin: 0; }
   .list--spacious li { margin: 10px 0; }
 
-  /* Utility rows */
   .row { display: flex; align-items: center; gap: 10px; }
   .row.wrap { flex-wrap: wrap; }
   .gap-12 { gap: 10px; }
@@ -156,7 +155,7 @@
         <a style="height: 24px; background-color: white; color: #050d19;" class="btn btn--primary" href="/todo/input" style="height:38px;">일정 추가</a>
       </div>
 
-      <!-- 임베드 모드(상단 타이틀 숨김) -->
+      <!-- 임베드 모드 -->
       <iframe
         id="calendarFrame"
         class="iframe-calendar"
@@ -187,7 +186,7 @@
     if (bar) requestAnimationFrame(() => bar.style.width = capped + '%');
   })();
 
-  // 달력 iframe 자동 높이(동일 도메인 전제)
+  // 달력 iframe 동일 도메인 
   (function autoSizeCalendar () {
     const ifr = document.getElementById('calendarFrame');
     if (!ifr) return;
