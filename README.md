@@ -80,7 +80,7 @@
 
 ## 페이지 리뷰 
 • 홈 뷰 : 
-![home](https://raw.githubusercontent.com/seirah-yang/HabiDo/habido/webpages/home.png)
+![home](https://raw.githubusercontent.com/seirah-yang/seirah/habido/webpages/home.png)
 
 - 메인 페이지에는 사용자를 동기부여할 수 있는 문구와 함께, 할 일 목록 및 습관 트래킹을 시작할 수 있는 버튼을 배치했습니다.
 - 지난달의 목록 설정 현황과 완료 현황은 스테이지 바를 통해 시각적으로 확인할 수 있도록 구성했습니다.
@@ -89,7 +89,7 @@
 
 
 • 달력 :
-![calendar](https://raw.githubusercontent.com/seirah-yang/HabiDo/habido/webpages/calendar.png)
+![calendar](https://raw.githubusercontent.com/seirah-yang/seirah/habido/webpages/calendar.png)
 
 - 메인 페이지와 동일한 달력을 큰 화면에서 볼 수 있으며, 월별·일별 일정이 시각화됩니다. 
 - 일정은 점(dot)으로 구분되며, 회색은 진행 중 또는 미완료, 초록색은 완료를 의미합니다.
@@ -97,21 +97,21 @@
 
 
 • 할 일 추가:
-![todoInput](https://raw.githubusercontent.com/seirah-yang/HabiDo/habido/webpages/todoInput.png)
+![todoInput](https://raw.githubusercontent.com/seirah-yang/seirah/habido/webpages/todoInput.png)
 
 - 할 일 추가 페이지에서 제목과 내용을 입력해 새 항목을 만들 수 있습니다.
 - 태그와 마감일은 선택 사항이며, 마감일을 입력하면 달력에 표시됩니다.
 
   
 • 할 일 목록
-![todoList](https://raw.githubusercontent.com/seirah-yang/HabiDo/habido/webpages/todoList.png)
+![todoList](https://raw.githubusercontent.com/seirah-yang/seirah/habido/webpages/todoList.png)
 
 - 추가된 목록을 확인할 수 있으며, 키워드와 태그로 검색 가능합니다. 
 - 생성한 목록은 속성 관리 및 삭제가 가능합니다.
 
 
 • 속성관리: 기간선정
-![속성:기간설정](https://raw.githubusercontent.com/seirah-yang/HabiDo/habido/webpages/todoDetail1.png)
+![속성:기간설정](https://raw.githubusercontent.com/seirah-yang/seirah/habido/webpages/todoDetail1.png)
 
 - 속성 관리 페이지에서는 할 일이나 습관 트래킹의 기간을 설정할 수 있습니다. 
 - 속성은 ‘1주차’, ‘2주차’, ‘1회성’, 특정 날짜 등 자유롭게 기재할 수 있으며, 진행 상태나 세부 속성은 드롭다운에서 선택하거나 ‘기타’를 선택해 직접 입력할 수 있습니다. 
@@ -119,7 +119,7 @@
 
 
 • 속성관리: 요일 트래킹
-![속성:요일트래킹](https://raw.githubusercontent.com/seirah-yang/HabiDo/habido/webpages/todoDetail2.png)
+![속성:요일트래킹](https://raw.githubusercontent.com/seirah-yang/seirah/habido/webpages/todoDetail2.png)
 
 - 속성을 추가하면 요일 목록이 생성되며, 해당 목록을 통해 요일별 수행 내역을 트래킹할 수 있습니다. 
 - 이는 습관 관리에 유용하며, 개인 목적에 맞게 활용할 수 있습니다. 
