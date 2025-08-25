@@ -1,5 +1,7 @@
 # 할 일 & 습관 Tracker HabiDo 
-![HabiDo]Ohttps://github.com/seirah-yang/seirah/blob/habido/habido_logo.png)
+
+![HabiDo](https://github.com/seirah-yang/seirah/blob/habido/habido_logo.png)
+
 	홈페이지에 보이는 HabiDo 로고는 습관을 뜻하는 Habit의 H에 트래킹 할 때 완료하면 체크하라는 의미의 ✔️표시를 더해 만들었습니다. 
     본 서비스는 할 일 또는 일정 목록을 관리하고 습관화 하고자 하는 일을 트랰킹 하는 웹 애플리케이션 입니다. 
     사용자는 할일을 등록, 수정, 삭제할 수 있으며, 목록을 생성한 후 세부 속성을 추가하여 진행 상태를 관리 할 수 있습니다. 
