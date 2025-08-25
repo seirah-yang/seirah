@@ -76,28 +76,18 @@
     4) 서버 실행 
       |bash 
       |npm start
-
+ ---------------------
 
 ## 화면 리뷰
-    • 홈 뷰 : 동기부여 제공하는 페이지와 iframe 작은 달력으로 일정 시각화
-      	![메인화면](./wepages/home.달력.png)
-      	![메인화면:일정목록](./wepages/home.list시각화.png)
-    • 리스트 뷰 : 할 일 목록 확인 및 완료 체크
-      	![할 일 목록](./wepages/todoList.png)
-    • 상세 뷰 : 속성 관리 및 기간 선택
-      	![속성: 기간선정](./wepages/todoDetail.기간선정.png)
-      	![속성: 요일체크](./wepages/todoDetail.요일트래킹.png)
-    • 달력 뷰 : 일정 시각화
-      	![달력](./wepages/calendar.png)
-    • 목록추가 뷰 : 할 일 목록 추가
-      	![목록 추가/생성](./wepages/todoInput.png)
-
-## 확장 및 개선 안 
-    • 사용자 로그인 & 개별 계정 Todo 관리
-    • 사용자/계정 간 일정 공유 및 연동 서비스 
-    • 검색 & 필터(날짜별 / 태그별)
+    • 홈 뷰 : 
+	- 메인 페이지에는 사용자를 동기부여할 수 있는 문구와 함께, 할 일 목록 및 습관 트래킹을 시작할 수 있는 버튼을 배치했습니다.
+	- 지난달의 목록 설정 현황과 완료 현재
     • 캘린더 뷰 개선(정렬, 완료목록, 좌측/우측 사이드 메뉴 활용 등)
-
-  👩‍💻 제작자
+ ---------------------
+ 
+## 👩‍💻 제작자
 	• 양소라 (@Yang Sora)
 	  : 디자인 기획, 프론트엔드, 백엔드, 데이터 설계
+
+## 참고문헌
+Singh, B., Bishop, D. T., Thirlaway, K., & Glover, E. I. (2022). How long does it take to form a habit? A systematic review and meta-analysis of the evidence. Health Psychology Review, 16(4), 527–548. https://doi.org/10.1080/17437199.2021.1942063
