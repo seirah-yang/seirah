@@ -26,7 +26,7 @@ const server = http.createServer(app);
 app.locals.db = null;
 app.locals.todos = null;
 
-// ====== 유틸리티 함수 ======
+// ====== 유틸리티 ======
 function toYMD(d) {
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, "0");
@@ -34,7 +34,7 @@ function toYMD(d) {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-// ====== 뷰/정적 설정 ======
+// ====== 뷰/정적 ======
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -137,7 +137,7 @@ app.get("/todo/detail", async (req, res) => {
   }
 });
 
-// 개별 prop 추가/수정/삭제 (기존 유지)
+// 개별 prop 추가/수정/삭제 
 app.post("/todo/props/add", async (req, res) => {
   try {
     const { _id } = req.body;
@@ -215,7 +215,7 @@ app.post("/todo/props/delete", async (req, res) => {
   }
 });
 
-// todo 수정 저장
+// 수정 저장
 app.post("/todo/save", async (req, res) => {
   try {
     const id = req.body._id;
@@ -238,7 +238,7 @@ app.post("/todo/save", async (req, res) => {
   }
 });
 
-// ✅ done 토글
+// done 
 app.post("/todo/toggle", async (req, res) => {
   try {
     const { _id } = req.body;
@@ -260,7 +260,7 @@ app.post("/todo/toggle", async (req, res) => {
   }
 });
 
-// ✅ 삭제 (AJAX/일반 겸용)
+// 삭제 (AJAX)
 app.post("/todo/delete", async (req, res) => {
   try {
     const { _id } = req.body;
@@ -302,7 +302,7 @@ app.get("/calendar", async (req, res) => {
   res.render("calendar", { year: y, month: m, first, last, map, toYMD, compact: req.query.compact === "1", active: 'cal' });
 });
 
-// 차트 페이지
+// 차트
 app.get("/monthly/chart", (req, res) => {
     res.render("chart", { active: 'chart' });
 });
@@ -352,11 +352,11 @@ app.get('/api/chart/monthly-completion', async (req, res) => {
     await client.db("admin").command({ ping: 1 });
     app.locals.db = client.db(dbName);
     app.locals.todos = app.locals.db.collection("todolist");
-    console.log("✅ MongoDB connected – DB:", dbName);
+    console.log(" MongoDB connected – DB:", dbName);
 
-    server.listen(PORT, () => console.log(`✅ Server: http://localhost:${PORT}`));
+    server.listen(PORT, () => console.log(` Server: http://localhost:${PORT}`));
   } catch (e) {
-    console.error("❌ DB 연결 실패:", e);
+    console.error(" DB 연결 실패:", e);
     process.exit(1);
   }
 })();
