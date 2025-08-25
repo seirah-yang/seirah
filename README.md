@@ -89,7 +89,7 @@
 
 
 • 달력 :
-![calendar](https://raw.githubusercontent.com/seirah-yang/seirah/habido/webpages/calendar.png)
+![calendar](https://github.com/seirah-yang/seirah/blob/habido/wepages/calendar.png)
 
 - 메인 페이지와 동일한 달력을 큰 화면에서 볼 수 있으며, 월별·일별 일정이 시각화됩니다. 
 - 일정은 점(dot)으로 구분되며, 회색은 진행 중 또는 미완료, 초록색은 완료를 의미합니다.
