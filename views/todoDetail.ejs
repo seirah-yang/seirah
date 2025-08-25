@@ -7,7 +7,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
 
 <style>
-  /* 요일 칩 토글 */
+  /* 요일 */
   .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid #d0d4da;border-radius:10px;cursor:pointer;user-select:none}
   .chip.active{background:#e8f7ee;border-color:#bfe7cf}
   .chip .dot{width:10px;height:10px;border-radius:50%;background:#aaa}
@@ -74,7 +74,6 @@
     </form>
   </section>
 
-  <!-- ======================= Tracking ======================= -->
   <section class="card mt">
     <div class="card__title">Tracking</div>
 
@@ -94,13 +93,11 @@
           <div class="todo-main" style="flex:1 1 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
             <div class="todo-title" style="min-width:60px"><%- p.name %></div>
 
-            <!-- 완료 토글 -->
             <label class="row gap" style="align-items:center">
               <input type="checkbox" class="prop-done" data-prop-id="<%= p._id %>" <%= _done ? 'checked' : '' %> />
               <span>완료</span>
             </label>
 
-            <!-- 상태 -->
             <select class="input prop-status" style="max-width:160px" data-prop-id="<%= p._id %>">
               <option value="Done"       <%= _status==='Done' ? 'selected' : '' %>>완료</option>
               <option value="일정 확정"  <%= _status==='일정 확정' ? 'selected' : '' %>>일정확정</option>
@@ -121,11 +118,10 @@
               <option value="월 ()일"   <%= _detail==='월 ()일'   ? 'selected' : '' %>>월 ()일</option>
             </select>
 
-            <!-- 기간(히든) -->
+            <!-- 기간(hidden) -->
             <input type="hidden" class="prop-start" data-prop-id="<%= p._id %>" value="<%= _sd ? toYMD(_sd) : '' %>" />
             <input type="hidden" class="prop-end"   data-prop-id="<%= p._id %>" value="<%= _ed ? toYMD(_ed) : '' %>" />
 
-            <!-- 기타 메모 -->
             <input
               class="input prop-note"
               style="max-width:220px;<%= _status==='기타' ? '' : 'display:none' %>"
@@ -134,7 +130,6 @@
               value="<%- _status==='기타' ? _note : '' %>"
             />
 
-            <!-- 요일(칩) -->
             <div class="chip-group" data-prop-id="<%= p._id %>">
               <% const DAYS = [
                    {k:'Mon',t:'월'},{k:'Tue',t:'화'},{k:'Wed',t:'수'},
@@ -147,7 +142,6 @@
               <% }) %>
             </div>
 
-            <!-- 기간 표시/선택 -->
             <input
               class="input prop-period"
               data-prop-id="<%= p._id %>"
@@ -167,7 +161,6 @@
       <% }) %>
     </ul>
 
-    <!-- 추가 폼 -->
     <form id="propAdd" class="row gap mt" style="flex-wrap:wrap;align-items:center">
       <input type="hidden" name="_id" value="<%= todo._id %>" />
 
@@ -195,7 +188,6 @@
         <option value="텍스트">기타</option>
       </select>
 
-      <!-- '기타' 선택 시 노출 -->
       <input
         class="input"
         name="detailNote"
@@ -204,7 +196,6 @@
         placeholder="기타: 메모를 입력하세요"
       />
 
-      <!-- 기간(달력) -->
       <input class="input" id="add-period" type="text" readonly style="flex:1 1 200px" placeholder="기간 선택" />
       <input type="hidden" name="startDate" id="add-start" />
       <input type="hidden" name="endDate"   id="add-end" />
@@ -222,7 +213,6 @@
   const fmt  = d => (d ? d.toISOString().slice(0, 10) : ''); // YYYY-MM-DD
   const disp = (s, e) => (s && e) ? s.replaceAll('-', '.') + '. ~ ' + e.replaceAll('-', '.') + '.' : '';
 
-
   const detailSel  = document.getElementById('add-detail');
   const detailNote = document.getElementById('add-detail-note');
   if (detailSel && detailNote) {
@@ -232,13 +222,11 @@
     });
   }
 
-
   document.getElementById('propAdd').addEventListener('submit', function () {
     if (detailSel?.value === '텍스트' && detailNote.value.trim()) {
       detailSel.value = detailNote.value.trim();
     }
   });
-
 
   function bindChipGroup(groupEl) {
     if (!groupEl) return;
@@ -250,7 +238,6 @@
   }
   document.querySelectorAll('.chip-group').forEach(bindChipGroup);
 
-  // 기간 range picker (기존 항목)
   function initRangeForItem(input) {
     const pid        = input.dataset.propId;
     const startInput = document.querySelector(`.prop-start[data-prop-id="${pid}"]`);
@@ -276,7 +263,6 @@
   }
   document.querySelectorAll('.prop-period').forEach(initRangeForItem);
 
-
   (function initAddRange() {
     const addPeriod = document.getElementById('add-period');
     if (!addPeriod) return;
@@ -297,7 +283,6 @@
     });
   })();
 
-  // 상태 변경 시 기타 메모 토글
   document.querySelectorAll('.prop-status').forEach((sel) => {
     sel.addEventListener('change', () => {
       const pid = sel.dataset.propId;
@@ -360,7 +345,6 @@
     });
   });
 
-  // 상단 폼 저장
   document.getElementById('mainForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const fd   = new FormData(e.target);
